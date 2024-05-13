@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+    <textarea id="textInput" rows="5" cols="50" placeholder="Enter text here..."></textarea>
+    <div id="wordCountDisplay"></div>
+    <div id="complicatedWordsDisplay"></div>
+    <div id="sentenceCountDisplay"></div>
+    <div id="characterCountDisplay"></div>
+    <div id="spaceCountDisplay"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let textInput = document.getElementById('textInput');
+            let wordCountDisplay = document.getElementById('wordCountDisplay');
+            let complicatedWordsDisplay = document.getElementById('complicatedWordsDisplay');
+            let sentenceCountDisplay = document.getElementById('sentenceCountDisplay');
+            let characterCountDisplay = document.getElementById('characterCountDisplay');
+            let spaceCountDisplay = document.getElementById('spaceCountDisplay');
+
+
+            textInput.addEventListener('input', () => {
+                let text = textInput.value.trim();
+                let words = text.split(/\s+/);
+                let sentences = text.match(/[.!?]+/g) || [];
+                let wordCount = words.length;
+                let complicatedWords = words.filter(word => word.length > 10).length;
+                let sentenceCount = sentences.length;
+                let characterCount = text.length;
+                let spaceCount = text.split(' ').length - 1;
+
+                wordCountDisplay.textContent = `Word Count: ${wordCount}`;
+                complicatedWordsDisplay.textContent = `Complicated Words: ${complicatedWords}`;
+                sentenceCountDisplay.textContent = `Sentence Count: ${sentenceCount}`;
+                characterCountDisplay.textContent = `Character Count: ${characterCount}`;
+                spaceCountDisplay.textContent = `Space Count: ${spaceCount}`;
+            });
+        });
+    </script>
+</body>
+</html>
